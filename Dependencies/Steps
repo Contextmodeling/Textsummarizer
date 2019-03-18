@@ -1,0 +1,65 @@
+https://towardsdatascience.com/write-a-simple-summarizer-in-python-e9ca6138a08e
+
+1.  pip install nltk
+*********************
+
+NLTK has a large corpus of data so not everything is installed with the priamry PyPi package. The next step will bring us into the interactive Python interpreter to install the remaining necessary pieces.
+
+	$ python
+	>>> import nltk
+	>>> nltk.download('punkt')
+	>>> exit()
+
+2.	Argparse and Command Line Functions
+****************************************
+
+Argparse is a built-in Python module made avaiable in version 3.2 of Python. 
+
+3.	Reading Content
+*******************
+
+We will be writing a function called read_file that is responsible for accepting a file path and returning the entire contents in memory, or erroring out if the file can not be found or does not have read permission.
+
+4.	Data Cleanup
+****************
+
+Most things I read about data science and machine learning say that 80% of the time is spent working on data sanitization, collection, and normalization. This is done by string translation
+
+5.	Tokenizing
+***************
+
+Stop words are common words like and or or that we do not want to have an impact on the scoring of the sentences for our final summary. So the stop_words variable contains a set (to eliminate duplicates) of the stop words for English contained in NLTK and a list of common punctuation which is also provided by the toolkit.
+
+The words_tokenize function is made available by NLTK and it takes a copy of the content, which we convert to lowr case, and returns an array of all of the unique words(one or more occurences) that appeared in the input.
+
+We will need to store a copy of our content tokenized into individual sentences for later, so we return this as the first index of the list we return from the tokenize_content function.
+
+The second item in our returned list is a list generated using a list comprehension, this inserts every word from our words list as long as it does not exist in the set we created containing stopwords and puncuation.
+
+6. Scoring
+**********
+
+We now have a list of unique sentences as well as a list of unique words, so we can score the frequency each word occurring in the story and use that to grade our sentences.
+
+The FreqDist function is another function we imported from NLTK. It accepts a list of tokens, like our filtered word list, and returns a structure where each key is the word and each value is the number of times that word occured.
+
+We then initialize a defaultdict (a great structure for making your own frequency maps) and we iterate over the sentences and increase their score based on the frequency of that particular word in the word_freq variable.
+
+The value of ranking will then contain key values of the sentence’s numeric position, and their score.
+
+7. Selecting the sentence
+*************************
+
+We pass the sentence_ranks dictionary that we generated with our scoring function, as well as the list of unique sentences in the sentence_tokens variable and the length of the summary requested which is a default of 4 if a value isn’t provided when launched.
+
+We first check the length requested is not longer than the total number of sentences available. If it is, we error out.
+
+The nlargest function is provided by NLTK and takes our sentence ranking data and turns it into a list of the numeric positions of the sentences in our sentence_tokens variable.
+
+We then use this list of indexes in a list comprehesion to put each sentence from our tokenized list into our final summary. We use sorted() to sort the list of indexes so our sentences will appear in their organic order. Finally these values are joined together into a string and returned.
+
+
+
+
+
+

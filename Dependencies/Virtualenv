@@ -1,0 +1,41 @@
+Taming Python Dependencies with Virtualenv
+-------------------------------------------
+
+Prerequisites
+*************
+
+1. You already have either Python 2.7 or Python 3.* installed
+2. You are comfortable with basic Python and installing packages via Pip.
+3. You are comfortable with utilizing the command line interface for your particular operating system.
+
+Install virtual env
+*******************
+
+The directory that houses our virtual environment lives inside the project folder, so let’s create a new new folder to play with.
+
+				mkdir venv_test && cd venv_test
+
+				pip3 install virtualenv				
+
+Setting Up Our Environment
+**************************
+
+				virtualenv <environment name>
+
+we must also now activate our environment. This step needs to be completed each time work begins on a project.
+
+				source <environment name/bin/activate>				
+
+Freezing Dependencies and Source Control
+*****************************************
+
+				pip3 install requests
+
+				pip3 freeze > requirements.txt				
+
+				pip3 install -r requirements.txt
+
+Deactivating Our Environment
+****************************
+			
+				deactivate				
